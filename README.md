@@ -21,9 +21,7 @@
 
 
 ## <span id="links">Links:</span>
-GitHub Repository: 
-
-Deployed Sample HTML: 
+GitHub Repository: https://github.com/Michael-Bee/Employee_Management_System
 
 
 ## <span id="screenshot">Screenshot:</span>

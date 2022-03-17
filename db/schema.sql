@@ -5,8 +5,10 @@ USE employee_cms_db;
 
 CREATE TABLE departments (
     dept_id INT NOT NULL AUTO_INCREMENT,
-    deptartment VARCHAR(30) NOT NULL PRIMARY KEY
+    deptartment VARCHAR(30) NOT NULL
     
+    FOREIGN KEY (departments)
+    REFERENCES departments(department)
     ON DELETE SET NULL
 );
 
@@ -16,8 +18,8 @@ CREATE TABLE roles (
     deptartment VARCHAR(30) NOT NULL,
     salary INT NOT NULL,
 
-    FOREIGN KEY (department)
-    REFERENCES department(id)
+    FOREIGN KEY (departments)
+    REFERENCES departments(department)
     
     ON DELETE SET NULL
 );
