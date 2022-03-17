@@ -9,21 +9,24 @@ const db = mysql.createConnection(
     host: 'localhost',
     user: 'root',
     password: 'rootuser',
-    database: 'employees_db'
+    database: 'employee_cms_db'
   },
 );
 
-//An array of questions for user input
-//Need to make a bunch of different arrays that can redirect to based on user responses
-const welcome = [
-    {
-        
-    },
-];
 
-//Prompts user using the question array
-inquirer.prompt(welcome)
-    .then((answers) => {
-        console.log(answers);
-    }
-);
+function init(){
+  initialPrompt();
+}
+
+function initialPrompt(){
+inquirer.prompt([
+  {
+  type: "list",
+  message: "What would you like to do?",
+  name: "selection",
+  choices: ["View All Departments", "View All Roles", "View All Employees", "Add Department", "Add Role", "Add Employee", "Update an employee", "Exit Program"]
+  }
+])
+  .then((selection) => {
+    console.log(selection);
+  })}
