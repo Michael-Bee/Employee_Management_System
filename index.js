@@ -29,4 +29,33 @@ inquirer.prompt([
 ])
   .then((selection) => {
     console.log(selection);
+
+    //if then elses depending on selection
+    if (selection === "View All Departments") {
+    initialPrompt();
+    }
+    else if (selection === "View All Roles") {
+      initialPrompt();
+    }
+    else if (selection === "View All Employees") {
+      initialPrompt();
+    }
+    else if (selection === "Add Department") {
+      initialPrompt();
+    }
+    else if (selection === "Add Role") {
+      initialPrompt();
+    }
+    else if (selection === "Add Employee") {
+      initialPrompt();
+    }
+    else if (selection === "Update an employee") {
+      initialPrompt();
+    }
+    else (selection === "Exit Program") {
+      process.exit();
+    }
   })}
+
+
+  init();
