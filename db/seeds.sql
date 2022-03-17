@@ -1,28 +1,28 @@
-INSERT INTO departments (deptartment)
+INSERT INTO departments (name)
 VALUES 
     ("Sales"),
     ("Engineering"),
     ("Finance"),
     ("Legal");
 
-INSERT INTO roles (title, deptartment, salary)
+INSERT INTO roles (title, deptartment_id, salary)
 VALUES 
-    ("Sales Lead", "Sales", 100000),
-    ("Salesperson", "Sales", 80000),
-    ("Lead Engineer", "Engineering", 150000),
-    ("Software Engineer", "Engineering", 120000),
-    ("Account Manager", "Finance", 160000),
-    ("Accountant", "Finance", 125000),
-    ("Legal Team Lead", "Legal", 250000),
-    ("Lawyer", "Legal", 190000);
+    ("Sales Lead", 1, 100000),
+    ("Salesperson", 1, 80000),
+    ("Lead Engineer", 2, 150000),
+    ("Software Engineer", 2, 120000),
+    ("Account Manager", 3, 160000),
+    ("Accountant", 3, 125000),
+    ("Legal Team Lead", 4, 250000),
+    ("Lawyer", 4, 190000);
 
-INSERT INTO employees (first_name, last_name, title, deptartment, salary, manager)
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES 
-    ("John", "Doe", "Sales Lead", "Sales", 100000, null),
-    ("Mike", "Chan", "Salesperson", "Sales", 80000), "John Doe",
-    ("Ashley", "Rodriguez", "Lead Engineer", "Engineering", 150000, null),
-    ("Kevin", "Tupik", "Software Engineer", "Engineering", 120000, "Ashley Rodriguez"),
-    ("Kunal", "Singh", "Account Manager", "Finance", 160000, null),
-    ("Malia", "Brown", "Accountant", "Finance", 125000, "Kunal Singh"),
-    ("Sarah", "Lourd","Legal Team Lead", "Legal", 250000, null),
-    ("Tom", "Allen", "Lawyer", "Legal", 190000, "Sarah Lourd");
+    ("John", "Doe", 1, "Sales", null),
+    ("Mike", "Chan", 2, 1),
+    ("Ashley", "Rodriguez", 3, null),
+    ("Kevin", "Tupik", 4, 3),
+    ("Kunal", "Singh", 5, null),
+    ("Malia", "Brown", 6, 5),
+    ("Sarah", "Lourd", 7, null),
+    ("Tom", "Allen", 8, 7);
