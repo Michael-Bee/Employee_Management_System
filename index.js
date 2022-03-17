@@ -3,17 +3,6 @@ const mysql = require('mysql2');
 const cTable = require('console.table');
 const figlet = require('figlet');
 
-
-// Connect to database
-const db = mysql.createConnection(
-  {
-    host: 'localhost',
-    user: 'root',
-    password: 'rootuser',
-    database: 'employee_cms_db'
-  },
-);
-
 //figlet intro
 console.log(figlet.textSync(
   'Employee Management System',
@@ -25,6 +14,21 @@ console.log(figlet.textSync(
     whitespaceBreak: true
   }
 ))
+
+// Connect to database
+const db = mysql.createConnection(
+  {
+    host: 'localhost',
+    user: 'root',
+    password: 'rootuser',
+    database: 'employee_cms_db'
+  },
+);
+
+db.connect(function(err) {
+  if (err) throw err;
+  console.log("Database connected!");
+});
 
 //Start Up
 function init(){
