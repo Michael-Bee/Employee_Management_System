@@ -132,5 +132,36 @@ function initialPrompt(){
   })
 };
 
+//View All Functions
+function viewAllDepartments() {
+  db.query(`SELECT * FROM departments;`, function (err, results) {
+    console.table(results);
+    });
+  initialPrompt();
+}
 
-  init();
+function viewAllRoles() {
+  db.query(`SELECT * FROM roles;`, function (err, results) {
+    console.table(results);
+    });
+  initialPrompt();
+}
+
+function viewAllEmployees() {
+  db.query(`SELECT * FROM employees;`, function (err, results) {
+    console.table(results);
+    });
+  initialPrompt();
+}
+
+// Add Functions
+
+
+// Other Functions
+
+function goodbye() {
+  console.log("Exiting the Employee Management System. Goodbye!");
+  process.exit();
+}
+
+init();
