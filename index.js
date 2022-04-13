@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const cTable = require('console.table');
 const figlet = require('figlet');
 
-//figlet intro
+// figlet intro
 console.log(figlet.textSync(
   'Employee Management System',
   {
@@ -25,7 +25,7 @@ const db = mysql.createConnection(
   },
 );
 
-//Start Up
+// Start Up
 function init(){
   db.connect(function(err) {
     if (err) throw err;
@@ -34,7 +34,7 @@ function init(){
   initialPrompt();
 }
 
-// First Prompt
+// Initial Prompt
 function initialPrompt(){
   inquirer.prompt([
     {
@@ -55,54 +55,7 @@ function initialPrompt(){
   .then((data) => {
     console.log(data);
     console.log(`You chose ${data.selection}.`);
-  // Second Prompt based on selection
-  //   // "View All" Selections
-  //   if (data.selection === "View All Departments") {
-  //     db.query(`SELECT * FROM departments;`, function (err, results) {
-  //       console.table(results);
-  //     });
-  //     initialPrompt();
-  //   }
 
-  //     else if (data.selection === "View All Roles") {
-  //       db.query(`SELECT * FROM roles;`, function (err, results) {
-  //         console.table(results);
-  //       });
-  //       initialPrompt();
-  //     }
-
-  //     else if (data.selection === "View All Employees") {
-  //       db.query(`SELECT * FROM employees;`, function (err, results) {
-  //         console.table(results);
-  //       });
-  //       initialPrompt();
-  //     }
-
-  //     //"Add" Selections
-  //     else if (data.selection === "Add Department") {
-  //       initialPrompt();
-  //     }
-
-  //     else if (data.selection === "Add Role") {
-  //       initialPrompt();
-  //     }
-
-  //     else if (data.selection === "Add Employee") {
-  //       initialPrompt();
-  //     }
-
-  //     //Other Selections
-  //     else if (data.selection === "Update an employee") {
-  //       initialPrompt();
-  //     }
-
-  //     else /*(data.selection === "Exit Program")*/ {
-  //       console.log("Exiting the Employee Management System. Goodbye!");
-  //       process.exit();
-  //     }
-  // })}
-
-// Using Switch Case technique instead
     switch (data.options) {
       case "View All Departments":
             viewAllDepartments()
@@ -132,7 +85,7 @@ function initialPrompt(){
   })
 };
 
-//View All Functions
+// View All Functions
 function viewAllDepartments() {
   db.query(`SELECT * FROM departments;`, function (err, results) {
     console.table(results);
@@ -155,9 +108,17 @@ function viewAllEmployees() {
 }
 
 // Add Functions
+function addDepartment() {
+
+}
+
+function addRole()
+
+function addEmployee()
 
 
 // Other Functions
+function updateEmployee()
 
 function goodbye() {
   console.log("Exiting the Employee Management System. Goodbye!");
