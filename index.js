@@ -36,7 +36,7 @@ function init(){
 
 // First Prompt
 function initialPrompt(){
-  inquirer.prompt(
+  inquirer.prompt([
     {
     type: "list",
     message: "What would you like to do?",
@@ -51,56 +51,86 @@ function initialPrompt(){
       "Update an employee", 
       "Exit Program"
       ]
-    })
+    }])
   .then((data) => {
     console.log(data);
     console.log(`You chose ${data.selection}.`);
-
   // Second Prompt based on selection
-    // "View All" Selections
-    if (data.selection === "View All Departments") {
-      db.query(`SELECT * FROM departments;`, function (err, results) {
-        console.table(results);
-      });
-      initialPrompt();
+  //   // "View All" Selections
+  //   if (data.selection === "View All Departments") {
+  //     db.query(`SELECT * FROM departments;`, function (err, results) {
+  //       console.table(results);
+  //     });
+  //     initialPrompt();
+  //   }
+
+  //     else if (data.selection === "View All Roles") {
+  //       db.query(`SELECT * FROM roles;`, function (err, results) {
+  //         console.table(results);
+  //       });
+  //       initialPrompt();
+  //     }
+
+  //     else if (data.selection === "View All Employees") {
+  //       db.query(`SELECT * FROM employees;`, function (err, results) {
+  //         console.table(results);
+  //       });
+  //       initialPrompt();
+  //     }
+
+  //     //"Add" Selections
+  //     else if (data.selection === "Add Department") {
+  //       initialPrompt();
+  //     }
+
+  //     else if (data.selection === "Add Role") {
+  //       initialPrompt();
+  //     }
+
+  //     else if (data.selection === "Add Employee") {
+  //       initialPrompt();
+  //     }
+
+  //     //Other Selections
+  //     else if (data.selection === "Update an employee") {
+  //       initialPrompt();
+  //     }
+
+  //     else /*(data.selection === "Exit Program")*/ {
+  //       console.log("Exiting the Employee Management System. Goodbye!");
+  //       process.exit();
+  //     }
+  // })}
+
+// Using Switch Case technique instead
+    switch (data.options) {
+      case "View All Departments":
+            viewAllDepartments()
+            break;
+      case "View All Roles":
+            viewAllRoles()
+            break;
+      case "View All Employees":
+            viewAllEmployees()
+            break;
+      case "Add Department":
+            addDepartment()
+            break;
+      case "Add Role":
+            addRole()
+            break;
+      case "Add Employee":
+            addEmployee()
+            break;
+      case "Update an employee":
+            updateEmployee()
+            break;
+      case "Exit Program":
+            goodbye()
+            break;
     }
+  })
+};
 
-      else if (data.selection === "View All Roles") {
-        db.query(`SELECT * FROM roles;`, function (err, results) {
-          console.table(results);
-        });
-        initialPrompt();
-      }
-
-      else if (data.selection === "View All Employees") {
-        db.query(`SELECT * FROM employees;`, function (err, results) {
-          console.table(results);
-        });
-        initialPrompt();
-      }
-
-      //"Add" Selections
-      else if (data.selection === "Add Department") {
-        initialPrompt();
-      }
-
-      else if (data.selection === "Add Role") {
-        initialPrompt();
-      }
-
-      else if (data.selection === "Add Employee") {
-        initialPrompt();
-      }
-
-      //Other Selections
-      else if (data.selection === "Update an employee") {
-        initialPrompt();
-      }
-
-      else /*(data.selection === "Exit Program")*/ {
-        console.log("Exiting the Employee Management System. Goodbye!");
-        process.exit();
-      }
-  })}
 
   init();
