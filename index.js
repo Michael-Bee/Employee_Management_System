@@ -45,10 +45,10 @@ function initialPrompt(){
       "View All Departments", 
       "View All Roles", 
       "View All Employees", 
-      // "Add Department", 
-      // "Add Role", 
-      // "Add Employee", 
-      // "Update an employee", 
+      "Add Department", 
+      "Add Role", 
+      "Add Employee", 
+      "Update an employee", 
       "Exit Program"
       ]
     })
@@ -79,23 +79,23 @@ function initialPrompt(){
         initialPrompt();
       }
 
-      // //"Add" Selections
-      // else if (data.selection === "Add Department") {
-      //   initialPrompt();
-      // }
+      //"Add" Selections
+      else if (data.selection === "Add Department") {
+        initialPrompt();
+      }
 
-      // else if (data.selection === "Add Role") {
-      //   initialPrompt();
-      // }
+      else if (data.selection === "Add Role") {
+        initialPrompt();
+      }
 
-      // else if (data.selection === "Add Employee") {
-      //   initialPrompt();
-      // }
+      else if (data.selection === "Add Employee") {
+        initialPrompt();
+      }
 
-      // //Other Selections
-      // else if (data.selection === "Update an employee") {
-      //   initialPrompt();
-      // }
+      //Other Selections
+      else if (data.selection === "Update an employee") {
+        initialPrompt();
+      }
 
       else /*(data.selection === "Exit Program")*/ {
         console.log("Exiting the Employee Management System. Goodbye!");

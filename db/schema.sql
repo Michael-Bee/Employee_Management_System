@@ -24,6 +24,7 @@ CREATE TABLE employees (
     last_name VARCHAR(30) NOT NULL,
     role_id INT NOT NULL REFERENCES roles(id),
     manager_id INT REFERENCES employee(id)
+    ON DELETE SET NULL
 );
 
 SELECT * FROM departments;
