@@ -58,29 +58,29 @@ function initialPrompt() {
 
     switch (answer.selection) {
       case "View All Departments":
-            viewAllDepartments()
-            break;
+        viewAllDepartments()
+        break;
       case "View All Roles":
-            viewAllRoles()
-            break;
+        viewAllRoles()
+        break;
       case "View All Employees":
-            viewAllEmployees()
-            break;
+        viewAllEmployees()
+        break;
       case "Add Department":
-            addDepartment()
-            break;
+        addDepartment()
+        break;
       case "Add Role":
-            addRole()
-            break;
+        addRole()
+        break;
       case "Add Employee":
-            addEmployee()
-            break;
+        addEmployee()
+        break;
       case "Update an employee":
-            updateEmployee()
-            break;
+        updateEmployee()
+        break;
       case "Exit Program":
-            goodbye()
-            break;
+        goodbye()
+        break;
     }
   })
 };
@@ -196,7 +196,31 @@ function addEmployee() {
 
 // Other Functions
 function updateEmployee() {
-  initialPrompt();
+  db.query(`SELECT * FROM employees;`, function (err, results) {
+    console.table(results);
+	inquirer.prompt([
+				{
+					type: "list",
+					message: "Which employee do you want to update?",
+					choices: [`SELECT * FROM employees;`],
+          name: "firstName",
+				},
+				{
+					type: "input",
+					message: "What is the employee's new role?",
+          name: "newRole",
+				},
+			])
+			.then((answer) => {
+				db.query(
+					`UPDATE employee SET role_id = "${answer.newRole}" WHERE first_name = "${answer.firstName}"`,
+					(err, result) => {
+						console.log(err);
+						initialPrompt();
+					}
+				);
+			});
+	});
 }
 
 function goodbye() {
