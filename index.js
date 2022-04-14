@@ -52,11 +52,11 @@ function initialPrompt(){
       "Exit Program"
       ]
     }])
-  .then((data) => {
-    console.log(data);
-    console.log(`You chose ${data.selection}.`);
+  .then((answer) => {
+    console.log(answer);
+    console.log(`You chose ${answer.selection}.`);
 
-    switch (data.options) {
+    switch (answer.options) {
       case "View All Departments":
             viewAllDepartments()
             break;
@@ -109,7 +109,19 @@ function viewAllEmployees() {
 
 // Add Functions
 function addDepartment() {
-
+  inquirer.prompt([
+			{
+				type: "input",
+				message: "What is the name of the new department?",
+        name: "newDepartment",
+			},
+		])
+		.then((answer) => {
+			db.query(
+				`INSERT INTO department VALUES (default, "${answer.newDept}");`,
+				(err, res) => {
+					console.log(`${answer.newDept} department added`);
+					console.log(err);
 }
 
 function addRole()
