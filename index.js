@@ -35,7 +35,7 @@ function init(){
 }
 
 // Initial Prompt
-function initialPrompt(){
+function initialPrompt() {
   inquirer.prompt([
     {
     type: "list",
@@ -56,7 +56,7 @@ function initialPrompt(){
     console.log(answer);
     console.log(`You chose ${answer.selection}.`);
 
-    switch (answer.options) {
+    switch (answer.selection) {
       case "View All Departments":
             viewAllDepartments()
             break;
@@ -89,48 +89,115 @@ function initialPrompt(){
 function viewAllDepartments() {
   db.query(`SELECT * FROM departments;`, function (err, results) {
     console.table(results);
-    });
-  initialPrompt();
+    initialPrompt();
+  });
 }
 
 function viewAllRoles() {
   db.query(`SELECT * FROM roles;`, function (err, results) {
     console.table(results);
-    });
-  initialPrompt();
+    initialPrompt();
+  });
 }
 
 function viewAllEmployees() {
   db.query(`SELECT * FROM employees;`, function (err, results) {
     console.table(results);
-    });
-  initialPrompt();
+    initialPrompt();
+  });
 }
 
 // Add Functions
 function addDepartment() {
   inquirer.prompt([
-			{
-				type: "input",
-				message: "What is the name of the new department?",
-        name: "newDepartment",
-			},
-		])
+		{
+			type: "input",
+			message: "What is the name of the new department?",
+      name: "newDepartment",
+		},
+	])
+	.then((answer) => {
+		db.query(`INSERT INTO department VALUES (default, "${answer.newDepartment}");`,
+			(err, res) => {
+				console.log(`New department ${answer.newDepartment} added`);
+				console.log(err);
+        initialPrompt();
+      }
+    )
+  })
+};
+
+function addRole() {
+  inquirer.prompt([
+		{
+			type: "input",
+			message: "What is the title of the new role?",
+      name: "newRole",
+		},
+		{
+			type: "input",
+			message: "Which department has the new role?",
+      name: "roleDept",
+		},
+    {
+			type: "input",
+			message: "What is the salary for the new role?",
+      name: "roleSalary",
+		},
+	])
 		.then((answer) => {
-			db.query(
-				`INSERT INTO department VALUES (default, "${answer.newDept}");`,
+			db.query(`INSERT INTO roles VALUES (default,
+				"${answer.newRole}",
+				"${answer.roleDept}",
+				"${answer.roleSalary}")`,
 				(err, res) => {
-					console.log(`${answer.newDept} department added`);
+					console.log(`New role ${answer.newRole} added`);
 					console.log(err);
+					initialPrompt();
+				}
+			);
+		});
 }
 
-function addRole()
-
-function addEmployee()
-
+function addEmployee() {
+  inquirer.prompt([
+		{
+			type: "input",
+			message: "What is the new employee's first name?",
+      name: "firstName",
+		},
+		{
+			type: "input",
+			message: "What is the new employee's last name?",
+      name: "lastName",
+		},
+		{
+			type: "input",
+			message: "What is the new employee's role?",
+      name: "role",
+		},
+		{
+			type: "input",
+			message: "What is the new employee's manager ID?",
+      name: "managerID",
+		},
+	])
+		.then((answer) => {
+			db.query(`INSERT INTO employees VALUES (default,
+				"${answer.firstName}",
+				"${answer.lastName}",
+				"${answer.role}",
+				"${answer.managerID}")`
+			);
+			console.log(`New employee ${answer.firstName} ${answer.lastName} added.`);
+			initialPrompt();
+		});
+}
 
 // Other Functions
-function updateEmployee()
+function updateEmployee() {
+  initialPrompt();
+}
 
 function goodbye() {
   console.log("Exiting the Employee Management System. Goodbye!");
