@@ -31,11 +31,11 @@ function init(){
     if (err) throw err;
     console.log("Database connected!");
   });
-  initialPrompt();
+  mainMenu();
 }
 
 // Initial Prompt
-function initialPrompt() {
+function mainMenu() {
   inquirer.prompt([
     {
     type: "list",
@@ -48,7 +48,7 @@ function initialPrompt() {
       "Add Department", 
       "Add Role", 
       "Add Employee", 
-      "Update an employee", 
+      "Update Employee Role", 
       "Exit Program"
       ]
     }])
@@ -75,7 +75,7 @@ function initialPrompt() {
       case "Add Employee":
         addEmployee()
         break;
-      case "Update an employee":
+      case "Update Employee Role":
         updateEmployee()
         break;
       case "Exit Program":
@@ -89,21 +89,21 @@ function initialPrompt() {
 function viewAllDepartments() {
   db.query(`SELECT * FROM departments;`, function (err, results) {
     console.table(results);
-    initialPrompt();
+    mainMenu();
   });
 }
 
 function viewAllRoles() {
   db.query(`SELECT * FROM roles;`, function (err, results) {
     console.table(results);
-    initialPrompt();
+    mainMenu();
   });
 }
 
 function viewAllEmployees() {
   db.query(`SELECT * FROM employees;`, function (err, results) {
     console.table(results);
-    initialPrompt();
+    mainMenu();
   });
 }
 
@@ -117,11 +117,10 @@ function addDepartment() {
 		},
 	])
 	.then((answer) => {
-		db.query(`INSERT INTO department VALUES (default, "${answer.newDepartment}");`,
+		db.query(`INSERT INTO departments VALUES (default, "${answer.newDepartment}");`,
 			(err, res) => {
 				console.log(`New department ${answer.newDepartment} added`);
-				console.log(err);
-        initialPrompt();
+        mainMenu();
       }
     )
   })
@@ -152,8 +151,7 @@ function addRole() {
 				"${answer.roleSalary}")`,
 				(err, res) => {
 					console.log(`New role ${answer.newRole} added`);
-					console.log(err);
-					initialPrompt();
+					mainMenu();
 				}
 			);
 		});
@@ -190,7 +188,7 @@ function addEmployee() {
 				"${answer.managerID}")`
 			);
 			console.log(`New employee ${answer.firstName} ${answer.lastName} added.`);
-			initialPrompt();
+			mainMenu();
 		});
 }
 
@@ -200,23 +198,22 @@ function updateEmployee() {
     console.table(results);
 	inquirer.prompt([
 				{
-					type: "list",
-					message: "Which employee do you want to update?",
-					choices: [`SELECT * FROM employees;`],
-          name: "firstName",
+					type: "input",
+					message: "Which employee (id) do you want to update?",
+          name: "empID",
 				},
 				{
 					type: "input",
-					message: "What is the employee's new role?",
+					message: "What is the employee's new role (role_id)?",
           name: "newRole",
 				},
 			])
 			.then((answer) => {
 				db.query(
-					`UPDATE employee SET role_id = "${answer.newRole}" WHERE first_name = "${answer.firstName}"`,
+					`UPDATE employees SET role_id = "${answer.newRole}" WHERE id = "${answer.empID}"`,
 					(err, result) => {
 						console.log(err);
-						initialPrompt();
+						mainMenu();
 					}
 				);
 			});
